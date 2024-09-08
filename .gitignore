@@ -1,0 +1,32 @@
+# Godot-specific
+.import/
+.godot/
+.mono/
+.mono_temp/
+
+# C# build outputs
+/bin/
+/obj/
+*.csproj.user
+
+# Rider and VSCode settings (optional)
+.idea/
+.vscode/
+
+# OS-specific files
+Thumbs.db
+Desktop.ini
+.DS_Store
+.directory
+
+# Build and export files
+/export/
+
+# Logs, temporary, and backup files
+*.log
+*.tmp
+*.temp
+*.bak
+
+# NuGet packages
+packages/

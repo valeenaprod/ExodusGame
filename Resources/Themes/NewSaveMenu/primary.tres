@@ -1,0 +1,26 @@
+[gd_resource type="Theme" load_steps=5 format=3 uid="uid://cit01cpp2ky1q"]
+
+[ext_resource type="FontFile" uid="uid://m3l6ar4cwhgc" path="res://Assets/Fonts/Merienda/Merienda-VariableFont_wght.ttf" id="1_4bsps"]
+[ext_resource type="FontFile" uid="uid://usw11un8tp45" path="res://Assets/Fonts/Shantell_Sans/ShantellSans-Italic-VariableFont_BNCE,INFM,SPAC,wght.ttf" id="1_e4ecr"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_hv3wc"]
+content_margin_left = 49.0
+content_margin_top = 39.0
+content_margin_right = 40.0
+content_margin_bottom = 40.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_k1n2u"]
+bg_color = Color(0.252241, 5.49653e-05, 0.261737, 1)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+corner_detail = 20
+
+[resource]
+default_font = ExtResource("1_e4ecr")
+default_font_size = 39
+Label/fonts/font = ExtResource("1_4bsps")
+Label/styles/normal = SubResource("StyleBoxEmpty_hv3wc")
+LineEdit/styles/normal = SubResource("StyleBoxFlat_k1n2u")
+VBoxContainer/styles/normal = null

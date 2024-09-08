@@ -1,0 +1,50 @@
+[gd_scene load_steps=2 format=3 uid="uid://drd1qd56gff6i"]
+
+[ext_resource type="Script" path="res://Scripts/GameManager.cs" id="1_ito4h"]
+
+[node name="GameManager" type="Node"]
+script = ExtResource("1_ito4h")
+
+[node name="HUD" type="CanvasLayer" parent="."]
+follow_viewport_enabled = true
+
+[node name="PanelContainer" type="PanelContainer" parent="HUD"]
+offset_left = 1060.0
+offset_top = -1.0
+offset_right = 1150.0
+offset_bottom = 103.0
+metadata/_edit_group_ = true
+metadata/_edit_lock_ = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HUD/PanelContainer"]
+layout_mode = 2
+
+[node name="PowerLevelContainer" type="VBoxContainer" parent="HUD/PanelContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="PL_Title" type="Label" parent="HUD/PanelContainer/VBoxContainer/PowerLevelContainer"]
+unique_name_in_owner = true
+editor_description = "PowerLevel title"
+layout_mode = 2
+text = "PowerLevel"
+
+[node name="PL_Value" type="Label" parent="HUD/PanelContainer/VBoxContainer/PowerLevelContainer"]
+unique_name_in_owner = true
+editor_description = "Value of \"PowerLevel\""
+layout_mode = 2
+
+[node name="FoodSupplyContainer" type="VBoxContainer" parent="HUD/PanelContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="FS_Title" type="Label" parent="HUD/PanelContainer/VBoxContainer/FoodSupplyContainer"]
+unique_name_in_owner = true
+editor_description = "FoodSupply title"
+layout_mode = 2
+text = "FoodSupply"
+
+[node name="FS_Value" type="Label" parent="HUD/PanelContainer/VBoxContainer/FoodSupplyContainer"]
+unique_name_in_owner = true
+editor_description = "Value of \"FoodSupply\""
+layout_mode = 2

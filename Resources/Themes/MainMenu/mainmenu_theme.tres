@@ -1,0 +1,21 @@
+[gd_resource type="Theme" load_steps=7 format=3 uid="uid://fw7ruv1gw5ft"]
+
+[ext_resource type="FontFile" uid="uid://m3l6ar4cwhgc" path="res://Assets/Fonts/Merienda/Merienda-VariableFont_wght.ttf" id="1_nfbr2"]
+[ext_resource type="StyleBox" uid="uid://m2i6d1txakha" path="res://Resources/Themes/MainMenu/button_primary.tres" id="2_qkfo0"]
+[ext_resource type="StyleBox" uid="uid://dxdluvkqe4ndi" path="res://Resources/Themes/MainMenu/label.tres" id="2_ww3nk"]
+[ext_resource type="FontFile" uid="uid://xelb28dknx5c" path="res://Assets/Fonts/Grandstander/Grandstander-VariableFont_wght.ttf" id="3_5xlp1"]
+[ext_resource type="StyleBox" uid="uid://dc1gswjhb0q3f" path="res://Resources/Themes/MainMenu/Panel_StyleBox.tres" id="4_4lrsv"]
+
+[sub_resource type="FontVariation" id="FontVariation_q1a1y"]
+fallbacks = Array[Font]([null])
+base_font = ExtResource("1_nfbr2")
+variation_embolden = 0.94
+
+[resource]
+Button/fonts/font = SubResource("FontVariation_q1a1y")
+Button/styles/normal = ExtResource("2_qkfo0")
+Label/font_sizes/font_size = 30
+Label/fonts/font = ExtResource("3_5xlp1")
+Label/styles/normal = ExtResource("2_ww3nk")
+PanelContainer/styles/panel = ExtResource("4_4lrsv")
+VBoxContainer/constants/separation = 20
