@@ -1,7 +1,7 @@
 ﻿using System.Runtime.CompilerServices;
 using Godot;
 
-namespace Bunkify.Scripts;
+namespace ExodusGame.Scripts;
 
 public static class Logger
 {
