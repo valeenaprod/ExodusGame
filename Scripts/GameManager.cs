@@ -1,24 +1,26 @@
-using Bunkify.Scripts.PlayerScripts;
+using ExodusGame.Scripts;
 using Godot;
+using Player = ExodusGame.Scripts.PlayerScripts.Player;
 
-namespace Bunkify.Scripts;
+namespace ExodusGame.Scripts;
 
 public partial class GameManager : Node
 {
+    private Label _foodSupplyLabel;
+    private Label _powerLevelLabel;
     public static GameManager Instance { get; private set; }
 
     // Properties
 
-    public int PowerLevel { get; private set; } = 100; // Current power level
+    public float PowerLevel { get; private set; } = 100; // Current power level
 
-    public int MaxPowerLevel { get; private set; } = 100; // Maximum power storage
-    public int PowerConsumptionRate { get; private set; } = 10; // Power used per second
+    public float MaxPowerLevel { get; private set; } = 100; // Maximum power storage
+    public float PowerConsumptionRate { get; private set; } = 0.5f; // Power used per second
     public int FoodSupply { get; private set; } = 50;
 
     public override void _Ready()
     {
         if (Instance == null)
-
         {
             Instance = this;
             // Make sure this Node doesn't get removed when scenes changes
@@ -28,22 +30,23 @@ public partial class GameManager : Node
         {
             QueueFree(); // Remove any duplicate instance
         }
+
+        _foodSupplyLabel = GetNode<Label>("%FS_Value");
+        _powerLevelLabel = GetNode<Label>("%PL_Value");
     }
 
     public override void _Process(double delta)
     {
         // Decrease power level based on consumption rate
-        PowerLevel -= PowerConsumptionRate * (int)delta;
-        
-        // Clamp the power value to avoir negative pwoer
+        PowerLevel -= PowerConsumptionRate * (float)delta;
+        // Clamp the power value to avoir negative power
         PowerLevel = Mathf.Clamp(PowerLevel, 0, MaxPowerLevel);
 
         // Check if power runs out
-        if (PowerLevel <= 0)
-        {
-            Logger.GameLog("Power is out! Systems are shutting down...");
-            //TODO: Add logic to handle power shut down
-        }
+        if (PowerLevel <= 0) Logger.GameLog("Power is out! Systems are shutting down...");
+        //TODO: Add logic to handle power shut down
+       _foodSupplyLabel.Text = FoodSupply.ToString();
+       _powerLevelLabel.Text = PowerLevel.ToString();
     }
 
     public void LoadGame()
@@ -54,30 +57,9 @@ public partial class GameManager : Node
         var playerInstance = playerScene.Instantiate<Player>();
         playerInstance.Position = new Vector2(144, 112);
         currentRoot?.CallDeferred("add_child", playerInstance);
-
-        // Set the value of the HUD
-        _updateHUD(HudItem.FoodSupply);
-        _updateHUD(HudItem.PowerLevel);
     }
 
     #region HUD
-
-    private void _updateHUD(HudItem item)
-    {
-        var foodSupply = GetNode<Label>("%FS_Value");
-        var powerLevel = GetNode<Label>("%PL_Value");
-        switch (item)
-        {
-            case HudItem.FoodSupply:
-                foodSupply.Text = FoodSupply.ToString();
-                break;
-            case HudItem.PowerLevel:
-                powerLevel.Text = PowerLevel.ToString();
-                break;
-            default:
-                return;
-        }
-    }
 
     private enum HudItem
     {
@@ -95,7 +77,6 @@ public partial class GameManager : Node
     {
         PowerLevel += amount;
         PowerLevel = Mathf.Clamp(PowerLevel, 0, MaxPowerLevel);
-        _updateHUD(HudItem.PowerLevel);
         Logger.GameLog($"PowerLevel has decreased!\n New PowerLevel: {PowerLevel}");
     }
 
@@ -103,7 +84,6 @@ public partial class GameManager : Node
     {
         PowerLevel -= amount;
         PowerLevel = Mathf.Clamp(PowerLevel, 0, MaxPowerLevel);
-        _updateHUD(HudItem.PowerLevel);
         Logger.GameLog($"PowerLevel has increased!\n New PowerLevel: {PowerLevel}");
     }
 
@@ -120,7 +100,6 @@ public partial class GameManager : Node
         }
 
         FoodSupply += amount;
-        _updateHUD(HudItem.FoodSupply);
     }
 
     public void DecreaseFoodSupply(int amount)
@@ -132,7 +111,6 @@ public partial class GameManager : Node
         }
 
         FoodSupply -= amount;
-        _updateHUD(HudItem.FoodSupply);
     }
 
     #endregion

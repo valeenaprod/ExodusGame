@@ -1,14 +1,14 @@
-using System;
-using Bunkify.Scripts;
+using ExodusGame.Scripts.Machine;
 
-public partial class DeskComputer : Machine
+namespace ExodusGame.Scripts;
+
+public partial class DeskComputer : PoweredMachine
 {
-
     public override void _Ready()
     {
         ObjectName = "Bunker Management Computer";
     }
-    
+
     public override void Interact()
     {
         base.Interact();
