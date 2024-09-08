@@ -1,13 +1,14 @@
-[gd_scene load_steps=9 format=3 uid="uid://cmfg6loq2u48k"]
+[gd_scene load_steps=10 format=3 uid="uid://cmfg6loq2u48k"]
 
 [ext_resource type="Shape2D" uid="uid://cnuid6fn1yo3f" path="res://CollisionShapes/PlayerCapsuleShape.tres" id="1_o6oos"]
 [ext_resource type="Script" path="res://Scripts/PlayerScripts/Player.cs" id="1_s56dc"]
 [ext_resource type="SpriteFrames" uid="uid://crvtytkemdh7c" path="res://Assets/BasicPlayerSpriteFrames.tres" id="3_ngp0c"]
 [ext_resource type="Shape2D" uid="uid://d4i35uiqksone" path="res://CollisionShapes/InteractionShape.tres" id="4_cw3eb"]
-[ext_resource type="Script" path="res://Scripts/PlayerScripts/PlayerController.cs" id="4_cy125"]
-[ext_resource type="Script" path="res://Scripts/PlayerScripts/PlayerInputHandler.cs" id="5_6aond"]
-[ext_resource type="Script" path="res://Scripts/PlayerScripts/PlayerMovementController.cs" id="6_kou2y"]
-[ext_resource type="Script" path="res://Scripts/PlayerScripts/PlayerInteractionController.cs" id="7_3201e"]
+[ext_resource type="Script" path="res://Scripts/PSM/PlayerStateMachine.cs" id="5_cnj35"]
+[ext_resource type="Script" path="res://Scripts/PSM/PlayerState.cs" id="6_o2v8u"]
+[ext_resource type="Script" path="res://Scripts/PSM/States/Idle.cs" id="7_ewifj"]
+[ext_resource type="Script" path="res://Scripts/PSM/States/Moving.cs" id="8_56y3n"]
+[ext_resource type="Script" path="res://Scripts/PSM/States/Interacting.cs" id="9_1om1j"]
 
 [node name="Player" type="CharacterBody2D"]
 script = ExtResource("1_s56dc")
@@ -24,16 +25,22 @@ animation = &"move_down"
 [node name="CollisionShape2D" type="CollisionShape2D" parent="InteractionArea"]
 shape = ExtResource("4_cw3eb")
 
-[node name="PlayerController" type="Node2D" parent="."]
-script = ExtResource("4_cy125")
+[node name="PSM" type="Node" parent="."]
+unique_name_in_owner = true
+script = ExtResource("5_cnj35")
 
-[node name="PlayerInputHandler" type="Node2D" parent="PlayerController"]
-position = Vector2(0, 1)
-script = ExtResource("5_6aond")
+[node name="PlayerState" type="Node" parent="PSM"]
+unique_name_in_owner = true
+script = ExtResource("6_o2v8u")
 
-[node name="PlayerMovementController" type="Node2D" parent="PlayerController"]
-script = ExtResource("6_kou2y")
+[node name="Idle" type="Node" parent="PSM/PlayerState"]
+unique_name_in_owner = true
+script = ExtResource("7_ewifj")
 
-[node name="PlayerInteractionController" type="Node2D" parent="PlayerController"]
-position = Vector2(0, -2)
-script = ExtResource("7_3201e")
+[node name="Moving" type="Node" parent="PSM/PlayerState"]
+unique_name_in_owner = true
+script = ExtResource("8_56y3n")
+
+[node name="Interacting" type="Node" parent="PSM/PlayerState"]
+unique_name_in_owner = true
+script = ExtResource("9_1om1j")
