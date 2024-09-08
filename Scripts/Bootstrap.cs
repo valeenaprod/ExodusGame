@@ -1,6 +1,6 @@
 using Godot;
 
-namespace Bunkify.Scripts;
+namespace ExodusGame.Scripts;
 
 public partial class Bootstrap : Node
 {
@@ -9,11 +9,10 @@ public partial class Bootstrap : Node
     public override void _Ready()
     {
         _sceneContainer = GetNode("SceneContainer");
-        GameManager.Instance.LoadGame();
-        
-        // Load default map scene
-        SwitchScene("res://Scenes/TestMap.tscn");
+        ExodusGame.Scripts.GameManager.Instance.LoadGame();
 
+        // Load default map scene
+        SwitchScene("res://Scenes/BunkerMap.tscn");
     }
 
     public void SwitchScene(string scenePath)
@@ -24,14 +23,12 @@ public partial class Bootstrap : Node
         _sceneContainer.AddChild(newSceneInstance);
     }
 }
+
 // Helper method to free all children in the container
 public static class NodeExtensions
 {
     public static void QueueFreeChildren(this Node node)
     {
-        foreach (var child in node.GetChildren())
-        {
-            child.QueueFree();
-        }
+        foreach (var child in node.GetChildren()) child.QueueFree();
     }
 }
