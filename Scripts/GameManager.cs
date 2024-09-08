@@ -9,7 +9,10 @@ public partial class GameManager : Node
 
     // Properties
 
-    public int PowerLevel { get; private set; } = 100;
+    public int PowerLevel { get; private set; } = 100; // Current power level
+
+    public int MaxPowerLevel { get; private set; } = 100; // Maximum power storage
+    public int PowerConsumptionRate { get; private set; } = 10; // Power used per second
     public int FoodSupply { get; private set; } = 50;
 
     public override void _Ready()
@@ -24,6 +27,22 @@ public partial class GameManager : Node
         else
         {
             QueueFree(); // Remove any duplicate instance
+        }
+    }
+
+    public override void _Process(double delta)
+    {
+        // Decrease power level based on consumption rate
+        PowerLevel -= PowerConsumptionRate * (int)delta;
+        
+        // Clamp the power value to avoir negative pwoer
+        PowerLevel = Mathf.Clamp(PowerLevel, 0, MaxPowerLevel);
+
+        // Check if power runs out
+        if (PowerLevel <= 0)
+        {
+            Logger.GameLog("Power is out! Systems are shutting down...");
+            //TODO: Add logic to handle power shut down
         }
     }
 
@@ -74,26 +93,16 @@ public partial class GameManager : Node
 
     public void DecreasePower(int amount)
     {
-        if (PowerLevel - amount < 0)
-        {
-            Logger.LogError("PowerLevel cannot be less than zero!", Name);
-            return;
-        }
-
-        PowerLevel -= amount;
+        PowerLevel += amount;
+        PowerLevel = Mathf.Clamp(PowerLevel, 0, MaxPowerLevel);
         _updateHUD(HudItem.PowerLevel);
         Logger.GameLog($"PowerLevel has decreased!\n New PowerLevel: {PowerLevel}");
     }
 
     public void IncreasePower(int amount)
     {
-        if (PowerLevel + amount > 100)
-        {
-            Logger.LogError("PowerLevel cannot be more than 100!", Name);
-            return;
-        }
-
-        PowerLevel += amount;
+        PowerLevel -= amount;
+        PowerLevel = Mathf.Clamp(PowerLevel, 0, MaxPowerLevel);
         _updateHUD(HudItem.PowerLevel);
         Logger.GameLog($"PowerLevel has increased!\n New PowerLevel: {PowerLevel}");
     }
