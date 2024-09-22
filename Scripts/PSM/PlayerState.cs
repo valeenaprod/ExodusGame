@@ -9,7 +9,7 @@ public abstract class PlayerState
 
     public PlayerState(PlayerStateMachine stateMachine)
     {
-        this.stateMachine = stateMachine ?? throw new ArgumentNullException(nameof(stateMachine))
+        this.stateMachine = stateMachine ?? throw new ArgumentNullException(nameof(stateMachine));
     }
     
     // Log when the state is entered

@@ -1,12 +1,19 @@
-﻿using ExodusGame.Scripts.PSM.States;
+﻿using ExodusGame.Scripts.PlayerScripts;
+using ExodusGame.Scripts.PSM.States;
 using Godot;
 
 namespace ExodusGame.Scripts.PSM;
 
 public partial class PlayerStateMachine : Node
 {
+    public Player Player { get; private set; }
+    
     private PlayerState _currentState;
 
+    public void Initialize(Player player)
+    {
+        Player = player;
+    }
     public void ChangeState(PlayerState newState)
     {
         if (newState == null)
