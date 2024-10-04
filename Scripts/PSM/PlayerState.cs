@@ -1,36 +1,39 @@
-﻿using Godot;
+﻿using System;
+using Godot;
 
 namespace ExodusGame.Scripts.PSM;
 
-public partial class PlayerState : Node
+public abstract class PlayerState
 {
-    public PlayerStateMachine PSM;
-    
+    protected PlayerStateMachine stateMachine;
 
+    public PlayerState(PlayerStateMachine stateMachine)
+    {
+        this.stateMachine = stateMachine ?? throw new ArgumentNullException(nameof(stateMachine));
+    }
+    
+    // Log when the state is entered
     public virtual void Enter()
     {
-        Logger.Log($"Entering State: {Name}", Name);
+        #if DEBUG
+        Logger.Log($"Entered {GetType().Name} state.");
+        #endif
     }
 
+    // Log when the state is exited
     public virtual void Exit()
     {
+        #if DEBUG
+        Logger.Log($"Exited {GetType().Name} state.");
+        #endif
     }
 
-#pragma warning disable CS0108, CS0114
-    public virtual void Ready()
+    public virtual void OnTransition(PlayerState nextState)
     {
-    }
-#pragma warning restore CS0108, CS0114
-    public virtual void Update(double delta)
-    {
+        // Override in specific states for custom transition logic (animations, effects, etc)
     }
 
-    public virtual void PhysicsUpdate(double delta)
-    {
-    }
+    public abstract void HandleInput(InputEvent @event);
+    public abstract void UpdateState(double delta);
 
-    public virtual void HandleInput(InputEvent @event)
-    {
-    }
-    
 }

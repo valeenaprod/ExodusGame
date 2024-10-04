@@ -1,4 +1,3 @@
-using ExodusGame.Scripts;
 using Godot;
 using Player = ExodusGame.Scripts.PlayerScripts.Player;
 
@@ -6,17 +5,44 @@ namespace ExodusGame.Scripts;
 
 public partial class GameManager : Node
 {
+    #region TopLevel
+
     private Label _foodSupplyLabel;
     private Label _powerLevelLabel;
+    private Label _waterSupplyLabel;
+    public PackedScene LineEditScene;
     public static GameManager Instance { get; private set; }
+    
+    #region PowerLevelProperties
 
-    // Properties
-
-    public float PowerLevel { get; private set; } = 100; // Current power level
-
-    public float MaxPowerLevel { get; private set; } = 100; // Maximum power storage
+    public float PowerLevel { get; private set; } = 100f; // Current power level
+    public float MaxPowerLevel { get; private set; } = 100f; // Maximum power storage
     public float PowerConsumptionRate { get; private set; } = 0.5f; // Power used per second
-    public int FoodSupply { get; private set; } = 50;
+
+    #endregion
+
+    #region FoodSupplyProperties
+
+    public float FoodSupply { get; private set; } = 50;
+    public float MaxFood { get; private set; } = 50;
+    public float FoodConsumption { get; private set; }
+
+    #endregion
+
+    #region WaterSupplyProperties
+
+    public float WaterSupply { get; private set; } = 50;
+    public float MaxWater { get; private set; } = 50;
+    public float WaterConsumption { get; private set; }
+
+    #endregion
+    
+    [Signal]
+    public delegate void PlayerMenuEventHandler(bool value);
+
+    public bool PlayerInMenu { get; private set; }
+    
+    #endregion
 
     public override void _Ready()
     {
@@ -33,6 +59,11 @@ public partial class GameManager : Node
 
         _foodSupplyLabel = GetNode<Label>("%FS_Value");
         _powerLevelLabel = GetNode<Label>("%PL_Value");
+        _waterSupplyLabel = GetNode<Label>("%WS_Value");
+
+        //
+
+        PlayerMenu += value => PlayerInMenu = value;
     }
 
     public override void _Process(double delta)
@@ -43,10 +74,11 @@ public partial class GameManager : Node
         PowerLevel = Mathf.Clamp(PowerLevel, 0, MaxPowerLevel);
 
         // Check if power runs out
-        if (PowerLevel <= 0) Logger.GameLog("Power is out! Systems are shutting down...");
+        if (PowerLevel <= 0) Logger.Log("Power is out! Systems are shutting down...");
         //TODO: Add logic to handle power shut down
-       _foodSupplyLabel.Text = FoodSupply.ToString();
-       _powerLevelLabel.Text = PowerLevel.ToString();
+        _foodSupplyLabel.Text = FoodSupply.ToString();
+        _powerLevelLabel.Text = PowerLevel.ToString();
+        _waterSupplyLabel.Text = FoodSupply.ToString();
     }
 
     public void LoadGame()
@@ -55,6 +87,7 @@ public partial class GameManager : Node
         // Load and instantiate the player
         var playerScene = GD.Load<PackedScene>("res://Player.tscn");
         var playerInstance = playerScene.Instantiate<Player>();
+        LineEditScene = GD.Load<PackedScene>("res://Scenes/LineEdit.tscn");
         playerInstance.Position = new Vector2(144, 112);
         currentRoot?.CallDeferred("add_child", playerInstance);
     }
@@ -64,27 +97,40 @@ public partial class GameManager : Node
     private enum HudItem
     {
         PowerLevel,
-        FoodSupply
+        FoodSupply,
+        WaterSupply
     }
 
     #endregion
+
+
 
     #region Resource Management
 
     #region PowerManagement
 
-    public void DecreasePower(int amount)
+    public void DecreasePower(float amount)
     {
         PowerLevel += amount;
         PowerLevel = Mathf.Clamp(PowerLevel, 0, MaxPowerLevel);
-        Logger.GameLog($"PowerLevel has decreased!\n New PowerLevel: {PowerLevel}");
+        // Logger.GameLog($"PowerLevel has decreased!\n New PowerLevel: {PowerLevel}");
     }
 
-    public void IncreasePower(int amount)
+    public void IncreasePower(float amount)
     {
         PowerLevel -= amount;
         PowerLevel = Mathf.Clamp(PowerLevel, 0, MaxPowerLevel);
-        Logger.GameLog($"PowerLevel has increased!\n New PowerLevel: {PowerLevel}");
+        //  Logger.GameLog($"PowerLevel has increased!\n New PowerLevel: {PowerLevel}");
+    }
+
+    public void IncreaseConsumptionRate(float amount)
+    {
+        PowerConsumptionRate += amount;
+    }
+
+    public void DecreaseConsumptionRate(float amount)
+    {
+        PowerConsumptionRate -= amount;
     }
 
     #endregion
@@ -95,7 +141,7 @@ public partial class GameManager : Node
     {
         if (FoodSupply + amount > 50)
         {
-            Logger.LogError("Food Supply cannot be more than 50!", Name);
+            Logger.Log("Food Supply cannot be more than 50!", Logger.LogLevel.Error);
             return;
         }
 
@@ -106,7 +152,7 @@ public partial class GameManager : Node
     {
         if (FoodSupply - amount < 0)
         {
-            Logger.LogError("Food Supply cannot less than 0!", Name);
+            Logger.Log("Food Supply cannot be less than 0!", Logger.LogLevel.Error);
             return;
         }
 
@@ -114,6 +160,8 @@ public partial class GameManager : Node
     }
 
     #endregion
+    
+    
 
     #endregion
 }

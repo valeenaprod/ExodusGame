@@ -1,0 +1,58 @@
+[gd_scene load_steps=5 format=3 uid="uid://qs0foorxt6yc"]
+
+[ext_resource type="Script" path="res://Scripts/Machine/PowerGenerator.cs" id="2_4tchn"]
+[ext_resource type="Texture2D" uid="uid://de3b5shr1psbx" path="res://Assets/Exterior/5_Floor_Modular_Building_Singles_16x16/ME_Singles_Floor_Modular_Building_16x16_Roof_Props_8.png" id="2_bgaoo"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_bec06"]
+radius = 14.0
+height = 48.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_f5gls"]
+height = 44.0
+
+[node name="Generator" type="StaticBody2D" groups=["interactable"]]
+collision_layer = 8
+collision_mask = 0
+input_pickable = true
+script = ExtResource("2_4tchn")
+
+[node name="ItemCollision" type="CollisionShape2D" parent="."]
+position = Vector2(-1, 6)
+shape = SubResource("CapsuleShape2D_bec06")
+
+[node name="GeneratorArea" type="Area2D" parent="." groups=["interactable"]]
+collision_layer = 8
+metadata/_edit_lock_ = true
+
+[node name="InteractionShape" type="CollisionShape2D" parent="GeneratorArea" groups=["interactable"]]
+visible = false
+position = Vector2(-1, 18)
+shape = SubResource("CapsuleShape2D_f5gls")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_bgaoo")
+metadata/_edit_lock_ = true
+
+[node name="FuelProgress" type="MarginContainer" parent="."]
+offset_left = -12.0
+offset_top = -27.0
+offset_right = 128.0
+offset_bottom = 27.0
+scale = Vector2(0.15, 0.15)
+metadata/_edit_group_ = true
+
+[node name="PanelContainer" type="PanelContainer" parent="FuelProgress"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="FuelProgress/PanelContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="FuelProgress/PanelContainer/VBoxContainer"]
+layout_mode = 2
+text = "Fuel"
+horizontal_alignment = 1
+
+[node name="ProgressBar" type="ProgressBar" parent="FuelProgress/PanelContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+rounded = true
