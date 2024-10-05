@@ -1,13 +1,13 @@
 ﻿using System;
 using Godot;
 
-namespace ExodusGame.Scripts.PSM;
+namespace ExodusGame.Scripts.Player.StateMachines;
 
 public abstract class PlayerState
 {
-    protected PlayerStateMachine stateMachine;
+    protected Player.StateMachines.PlayerStateMachine stateMachine;
 
-    public PlayerState(PlayerStateMachine stateMachine)
+    public PlayerState(Player.StateMachines.PlayerStateMachine stateMachine)
     {
         this.stateMachine = stateMachine ?? throw new ArgumentNullException(nameof(stateMachine));
     }

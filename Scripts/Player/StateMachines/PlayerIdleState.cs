@@ -1,10 +1,10 @@
 ﻿using Godot;
 
-namespace ExodusGame.Scripts.PSM.States;
+namespace ExodusGame.Scripts.Player.StateMachines;
 
 public class PlayerIdleState : PlayerState
 {
-    public PlayerIdleState(PlayerStateMachine stateMachine) : base(stateMachine) {}
+    public PlayerIdleState(Player.StateMachines.PlayerStateMachine stateMachine) : base(stateMachine) {}
 
     public override void Enter()
     {

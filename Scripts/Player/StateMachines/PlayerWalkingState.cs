@@ -1,10 +1,10 @@
 ﻿using Godot;
 
-namespace ExodusGame.Scripts.PSM.States;
+namespace ExodusGame.Scripts.Player.StateMachines;
 
 public class PlayerWalkingState : PlayerState
 {
-    public PlayerWalkingState(PlayerStateMachine stateMachine) : base(stateMachine) {}
+    public PlayerWalkingState(Player.StateMachines.PlayerStateMachine stateMachine) : base(stateMachine) {}
 
     private Vector2 _velocity;
 

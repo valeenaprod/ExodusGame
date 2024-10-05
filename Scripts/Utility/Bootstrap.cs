@@ -1,4 +1,3 @@
-using ExodusGame.Scripts.Systems;
 using Godot;
 
 namespace ExodusGame.Scripts.Utility;
@@ -10,7 +9,7 @@ public partial class Bootstrap : Node
     public override void _Ready()
     {
         _sceneContainer = GetNode("SceneContainer");
-        GameManager.Instance.LoadGame();
+        ExodusGame.Systems.GameManager.Instance.LoadGame();
 
         // Load default map scene
         SwitchScene("res://Scenes/BunkerMap.tscn");

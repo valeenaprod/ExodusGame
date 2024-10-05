@@ -1,16 +1,14 @@
-﻿using ExodusGame.Scripts.PlayerScripts;
-using ExodusGame.Scripts.PSM.States;
-using Godot;
+﻿using Godot;
 
-namespace ExodusGame.Scripts.PSM;
+namespace ExodusGame.Scripts.Player.StateMachines;
 
 public partial class PlayerStateMachine : Node
 {
-    public Player Player { get; private set; }
+    public PlayerController Player { get; private set; }
     
     private PlayerState _currentState;
 
-    public void Initialize(Player player)
+    public void Initialize(PlayerController player)
     {
         Player = player;
     }
