@@ -1,5 +1,4 @@
-using ExodusGame.Scripts.Player;
-using ExodusGame.Scripts.Utils;
+using ExodusGame.Scripts;
 using Godot;
 using Player = ExodusGame.Scripts.PlayerScripts.Player;
 
@@ -54,8 +53,9 @@ public partial class GameManager : Node
     {
         var currentRoot = GetTree().Root;
         // Load and instantiate the player
-        var playerScene = GD.Load<PackedScene>("res://Prefabs/PlayerScene.tscn");
-        var playerInstance = playerScene.Instantiate<PlayerController>();
+        var playerScene = GD.Load<PackedScene>("res://Player.tscn");
+        var playerInstance = playerScene.Instantiate<Player>();
+        LineEditScene = GD.Load<PackedScene>("res://Scenes/LineEdit.tscn");
         playerInstance.Position = new Vector2(144, 112);
         currentRoot?.CallDeferred("add_child", playerInstance);
     }
@@ -78,14 +78,24 @@ public partial class GameManager : Node
     {
         PowerLevel += amount;
         PowerLevel = Mathf.Clamp(PowerLevel, 0, MaxPowerLevel);
-        Logger.Log($"PowerLevel has decreased!\n New PowerLevel: {PowerLevel}");
+        Logger.GameLog($"PowerLevel has decreased!\n New PowerLevel: {PowerLevel}");
     }
 
     public void IncreasePower(int amount)
     {
         PowerLevel -= amount;
         PowerLevel = Mathf.Clamp(PowerLevel, 0, MaxPowerLevel);
-        Logger.Log($"PowerLevel has increased!\n New PowerLevel: {PowerLevel}");
+        //  Logger.GameLog($"PowerLevel has increased!\n New PowerLevel: {PowerLevel}");
+    }
+
+    public void IncreaseConsumptionRate(float amount)
+    {
+        PowerConsumptionRate += amount;
+    }
+
+    public void DecreaseConsumptionRate(float amount)
+    {
+        PowerConsumptionRate -= amount;
     }
 
     #endregion
@@ -107,7 +117,7 @@ public partial class GameManager : Node
     {
         if (FoodSupply - amount < 0)
         {
-            Logger.Log("Food Supply cannot less than 0!", Logger.LogLevel.Error);
+            Logger.Log("Food Supply cannot be less than 0!", Logger.LogLevel.Error);
             return;
         }
 
