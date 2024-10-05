@@ -1,0 +1,30 @@
+[gd_scene load_steps=5 format=4 uid="uid://cx3yffyhcvln1"]
+
+[ext_resource type="TileSet" uid="uid://dpkwb66sry3aj" path="res://new_tile_set.tres" id="1_l31a5"]
+[ext_resource type="Script" path="res://Prefabs/DeskComputer.cs" id="2_xbxgo"]
+
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_a1ld5"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_babmt"]
+radius = 11.5
+height = 44.0
+
+[node name="DeskComputer" type="StaticBody2D"]
+input_pickable = true
+script = ExtResource("2_xbxgo")
+
+[node name="TileMapLayer" type="TileMapLayer" parent="." groups=["interactable"]]
+tile_map_data = PackedByteArray("AAD///7/AQAOAC8AAAD/////AQAOADAAAAD//wAAAQAOADEAAAAAAP7/AQAPAC8AAAAAAP//AQAPADAAAAAAAAAAAQAPADEAAAA=")
+tile_set = ExtResource("1_l31a5")
+
+[node name="InteractionArea" type="Area2D" parent="TileMapLayer" groups=["interactable"]]
+visible = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TileMapLayer/InteractionArea" groups=["interactable"]]
+position = Vector2(0, 11)
+shape = SubResource("RectangleShape2D_a1ld5")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-0.5, -1)
+shape = SubResource("CapsuleShape2D_babmt")

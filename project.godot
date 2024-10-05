@@ -11,13 +11,13 @@ config_version=5
 [application]
 
 config/name="ExodusGame"
-run/main_scene="res://Scenes/Bootstrap.tscn"
-config/features=PackedStringArray("4.3", "C#", "Forward Plus")
+run/main_scene="res://Scenes/MainGame/BootstrapScene.tscn"
+config/features=PackedStringArray("4.4", "C#", "Forward Plus")
 config/icon="res://icon.svg"
 
 [autoload]
 
-GameManager="*res://Scenes/GameManager.tscn"
+GameManager="*res://Scenes/Systems/GameManagerScene.tscn"
 
 [dotnet]
 
