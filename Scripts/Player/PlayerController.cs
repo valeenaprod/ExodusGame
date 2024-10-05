@@ -1,9 +1,8 @@
-using ExodusGame.Scripts.PlayerScripts;
 using Godot;
 
-namespace ExodusGame.Scripts.PlayerScripts;
+namespace ExodusGame.Scripts.Player;
 
-public partial class Player : CharacterBody2D
+public partial class PlayerController : CharacterBody2D
 {
     private Node2D _inArea;
 

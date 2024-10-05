@@ -1,6 +1,7 @@
-﻿using Godot;
+﻿using ExodusGame.Scripts.Utils;
+using Godot;
 
-namespace ExodusGame.Scripts.PSM;
+namespace ExodusGame.Scripts.Player.StateMachines;
 
 public partial class PlayerState : Node
 {

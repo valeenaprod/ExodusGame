@@ -1,6 +1,6 @@
-﻿using ExodusGame.Scripts;
+﻿using ExodusGame.Scripts.Interaction;
 
-namespace ExodusGame.Scripts.Machine;
+namespace ExodusGame.Systems.ResourceManagement;
 
 public partial class WaterPurifier : PoweredMachine
 {

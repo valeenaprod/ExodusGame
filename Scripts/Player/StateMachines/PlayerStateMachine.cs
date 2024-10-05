@@ -1,14 +1,14 @@
-﻿using ExodusGame.Scripts.PlayerScripts;
+﻿using ExodusGame.Scripts.Utils;
 using Godot;
 using Godot.Collections;
 
-namespace ExodusGame.Scripts.PSM;
+namespace ExodusGame.Scripts.Player.StateMachines;
 
 public partial class PlayerStateMachine : Node
 {
     private NodePath _initialState;
 
-    public Player Player { get; private set; }
+    public PlayerController Player { get; private set; }
 
     private Dictionary<string, PlayerState> _states;
     public PlayerState CurrentState { get; private set; }
@@ -28,12 +28,12 @@ public partial class PlayerStateMachine : Node
                 s.Exit(); // reset all states
             }
 
-        CurrentState = GetNode<PlayerState>(_initialState);
+        CurrentState = GetNodeOrNull<PlayerState>(_initialState);
         CurrentState.Enter();
 
         //
 
-        Player = GetParent<Player>();
+        Player = GetParent<PlayerController>();
     }
 
     public override void _Process(double delta)

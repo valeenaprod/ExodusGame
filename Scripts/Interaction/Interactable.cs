@@ -1,7 +1,6 @@
-﻿using System;
-using Godot;
+﻿using Godot;
 
-namespace ExodusGame.Scripts;
+namespace ExodusGame.Scripts.Interaction;
 
 public partial class Interactable : Node2D
 {

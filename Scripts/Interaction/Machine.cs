@@ -1,6 +1,6 @@
-﻿using ExodusGame.Scripts;
+﻿using ExodusGame.Scripts.Utils;
 
-namespace ExodusGame.Scripts.Machine;
+namespace ExodusGame.Scripts.Interaction;
 
 public partial class PoweredMachine : Interactable
 {
@@ -36,7 +36,7 @@ public partial class PoweredMachine : Interactable
 
     private void StartMachine()
     {
-        if (GameManager.Instance.PowerLevel < PowerConsumption)
+        if (Systems.GameManager.Instance.PowerLevel < PowerConsumption)
         {
             Logger.Log($"Cannot start {ObjectName}. Not enough power.");
             return;

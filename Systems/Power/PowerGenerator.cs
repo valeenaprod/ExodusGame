@@ -1,6 +1,7 @@
-﻿using ExodusGame.Scripts;
+﻿using ExodusGame.Scripts.Interaction;
+using ExodusGame.Scripts.Utils;
 
-namespace ExodusGame.Scripts.Machine;
+namespace ExodusGame.Systems.Power;
 
 public partial class PowerGenerator : Interactable
 {

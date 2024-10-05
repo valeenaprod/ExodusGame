@@ -1,14 +1,15 @@
-﻿using Godot;
+﻿using ExodusGame.Scripts.Utils;
+using Godot;
 
-namespace ExodusGame.Scripts.PSM.States;
+namespace ExodusGame.Scripts.Player.StateMachines;
 
-public partial class Interacting : PlayerState
+public partial class PlayerInteractingState : PlayerState
 {
     public override void HandleInput(InputEvent @event)
     {
         if (@event is not InputEventMouseButton mouseEvent) return;
         var collider = GetObjectMouseClick(mouseEvent.Position);
-        if (collider is not Interactable) return;
+        if (collider is not Interaction.Interactable) return;
         if (!collider.HasSignal("OnInteract")) return;
         collider.EmitSignal("OnInteract");
     }

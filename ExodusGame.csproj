@@ -9,10 +9,14 @@
     <Compile Remove="Game\**" />
     <Compile Remove="Player\**" />
     <Compile Remove="Utils\**" />
+    <Compile Remove="Scripts\Interactable\**" />
+    <Compile Remove="Scripts\Player\States\**" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Remove="Game\**" />
     <EmbeddedResource Remove="Player\**" />
     <EmbeddedResource Remove="Utils\**" />
+    <EmbeddedResource Remove="Scripts\Interactable\**" />
+    <EmbeddedResource Remove="Scripts\Player\States\**" />
   </ItemGroup>
 </Project>

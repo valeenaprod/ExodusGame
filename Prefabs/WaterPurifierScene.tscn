@@ -1,0 +1,56 @@
+[gd_scene load_steps=4 format=3 uid="uid://da4rvp57uk3cq"]
+
+[ext_resource type="Texture2D" uid="uid://1emngtpam8go" path="res://Assets/Interior/Hospital_Singles_544.png" id="1_plrw4"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qg2pu"]
+size = Vector2(34, 37)
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_u53oj"]
+
+[node name="WaterPurifier" type="StaticBody2D" groups=["interactable"]]
+collision_layer = 8
+collision_mask = 0
+metadata/_edit_lock_ = true
+
+[node name="ItemCollision" type="CollisionShape2D" parent="."]
+position = Vector2(-4, 3.5)
+shape = SubResource("RectangleShape2D_qg2pu")
+
+[node name="WaterPurifierArea" type="Area2D" parent="." groups=["interactable"]]
+collision_layer = 8
+collision_mask = 0
+metadata/_edit_lock_ = true
+
+[node name="InteractionShape" type="CollisionShape2D" parent="WaterPurifierArea"]
+visible = false
+position = Vector2(-4, 28)
+shape = SubResource("CapsuleShape2D_u53oj")
+
+[node name="MarginContainer" type="MarginContainer" parent="WaterPurifierArea"]
+offset_left = -16.0
+offset_top = -27.0
+offset_right = 124.0
+offset_bottom = 27.0
+scale = Vector2(0.15, 0.15)
+metadata/_edit_group_ = true
+
+[node name="PanelContainer" type="PanelContainer" parent="WaterPurifierArea/MarginContainer"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="WaterPurifierArea/MarginContainer/PanelContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="WaterPurifierArea/MarginContainer/PanelContainer/VBoxContainer"]
+layout_mode = 2
+text = "Power
+"
+horizontal_alignment = 1
+
+[node name="ProgressBar" type="ProgressBar" parent="WaterPurifierArea/MarginContainer/PanelContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+rounded = true
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_plrw4")
+metadata/_edit_lock_ = true

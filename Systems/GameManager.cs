@@ -1,8 +1,8 @@
-using ExodusGame.Scripts;
+using ExodusGame.Scripts.Player;
+using ExodusGame.Scripts.Utils;
 using Godot;
-using Player = ExodusGame.Scripts.PlayerScripts.Player;
 
-namespace ExodusGame.Scripts;
+namespace ExodusGame.Systems;
 
 public partial class GameManager : Node
 {
@@ -53,8 +53,8 @@ public partial class GameManager : Node
     {
         var currentRoot = GetTree().Root;
         // Load and instantiate the player
-        var playerScene = GD.Load<PackedScene>("res://Game/Player/PlayerScene.tscn");
-        var playerInstance = playerScene.Instantiate<Player>();
+        var playerScene = GD.Load<PackedScene>("res://Prefabs/PlayerScene.tscn");
+        var playerInstance = playerScene.Instantiate<PlayerController>();
         playerInstance.Position = new Vector2(144, 112);
         currentRoot?.CallDeferred("add_child", playerInstance);
     }

@@ -1,8 +1,8 @@
 ﻿using Godot;
 
-namespace ExodusGame.Scripts.PSM.States;
+namespace ExodusGame.Scripts.Player.StateMachines;
 
-public partial class Moving : PlayerState
+public partial class PlayerMovingState : PlayerState
 {
     public override void PhysicsUpdate(double delta)
     {

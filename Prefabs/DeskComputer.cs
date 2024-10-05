@@ -1,6 +1,6 @@
-using ExodusGame.Scripts.Machine;
+using ExodusGame.Scripts.Interaction;
 
-namespace ExodusGame.Scripts;
+namespace ExodusGame.Prefabs;
 
 public partial class DeskComputer : PoweredMachine
 {

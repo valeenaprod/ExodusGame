@@ -1,9 +1,9 @@
 ﻿using System;
-using System.Threading.Tasks;
 using System.Runtime.CompilerServices;
+using System.Threading.Tasks;
 using Godot;
 
-namespace ExodusGame.Scripts;
+namespace ExodusGame.Scripts.Utils;
 
 public static class Logger
 {

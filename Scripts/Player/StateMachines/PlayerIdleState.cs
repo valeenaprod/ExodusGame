@@ -1,8 +1,8 @@
 ﻿using Godot;
 
-namespace ExodusGame.Scripts.PSM.States;
+namespace ExodusGame.Scripts.Player.StateMachines;
 
-public partial class Idle : PlayerState
+public partial class PlayerIdleState : PlayerState
 {
     public override void HandleInput(InputEvent @event)
     {
