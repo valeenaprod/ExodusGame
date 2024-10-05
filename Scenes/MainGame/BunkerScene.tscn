@@ -1,0 +1,21 @@
+[gd_scene load_steps=5 format=3 uid="uid://ctth5sa5q0i13"]
+
+[ext_resource type="PackedScene" uid="uid://qs0foorxt6yc" path="res://Prefabs/PowerGeneratorScene.tscn" id="2_d0t8u"]
+[ext_resource type="PackedScene" uid="uid://cx3yffyhcvln1" path="res://Prefabs/DeskComputer.tscn" id="3_3uxpq"]
+[ext_resource type="PackedScene" uid="uid://da4rvp57uk3cq" path="res://Prefabs/WaterPurifierScene.tscn" id="4_eu81p"]
+[ext_resource type="Script" path="res://Systems/ResourceManagement/WaterPurifier.cs" id="5_8ecdl"]
+
+[node name="BunkerMap" type="Node2D"]
+
+[node name="Generator" parent="." instance=ExtResource("2_d0t8u")]
+position = Vector2(122, 25)
+
+[node name="DeskComputer" parent="." instance=ExtResource("3_3uxpq")]
+position = Vector2(99, 35)
+
+[node name="Marker2D" type="Marker2D" parent="."]
+position = Vector2(122, 136)
+
+[node name="WaterPurifier" parent="." instance=ExtResource("4_eu81p")]
+position = Vector2(159, 26)
+script = ExtResource("5_8ecdl")

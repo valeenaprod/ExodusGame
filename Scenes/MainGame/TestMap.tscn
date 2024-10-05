@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://bpdqikbg6w7r5"]
+
+[ext_resource type="PackedScene" uid="uid://cx3yffyhcvln1" path="res://Prefabs/DeskComputer.tscn" id="2_6rhid"]
+
+[node name="TestMap" type="Node2D" groups=["interactable"]]
+
+[node name="Marker2D" type="Marker2D" parent="."]
+position = Vector2(144, 112)
+
+[node name="DeskComputer" parent="." instance=ExtResource("2_6rhid")]
+position = Vector2(328, 102)

@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://cx3yffyhcvln1"]
+
+[ext_resource type="Script" path="res://Prefabs/DeskComputer.cs" id="2_xbxgo"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_babmt"]
+radius = 11.5
+height = 44.0
+
+[node name="DeskComputer" type="StaticBody2D"]
+input_pickable = true
+script = ExtResource("2_xbxgo")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-0.5, -1)
+shape = SubResource("CapsuleShape2D_babmt")

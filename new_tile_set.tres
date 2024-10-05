@@ -1,7 +1,6 @@
-[gd_resource type="TileSet" load_steps=5 format=3 uid="uid://dpkwb66sry3aj"]
+[gd_resource type="TileSet" load_steps=4 format=3 uid="uid://dpkwb66sry3aj"]
 
-[ext_resource type="Texture2D" uid="uid://dtfls7y1v4e5p" path="res://Assets/Interior/Room_Builder_16x16.png" id="1_urae1"]
-[ext_resource type="Texture2D" uid="uid://l1rayk5nxj4j" path="res://Assets/Interior/Interiors_16x16.png" id="2_3bcgi"]
+[ext_resource type="Texture2D" uid="uid://b4vbtlgk18urh" path="res://Assets/Interior/Room_Builder_16x16.png" id="1_urae1"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_py86j"]
 texture = ExtResource("1_urae1")
@@ -3777,7 +3776,6 @@ texture = ExtResource("1_urae1")
 67:108/0 = 0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_6atxx"]
-texture = ExtResource("2_3bcgi")
 0:0/0 = 0
 1:0/0 = 0
 2:0/0 = 0
