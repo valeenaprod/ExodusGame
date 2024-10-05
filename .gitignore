@@ -1,6 +1,6 @@
 # Project-specific
 /Assets/
-/Addons
+/addons
 
 # Godot-specific
 .import/
